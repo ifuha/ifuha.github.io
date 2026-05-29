@@ -10,7 +10,7 @@ export default function Page() {
           <TextType
             text={["PORTFOLIO"]}
             typingSpeed={75}
-            pauseDuration={1500}
+            pauseDuration={2000}
             showCursor
             cursorCharacter="_"
             deletingSpeed={50}
