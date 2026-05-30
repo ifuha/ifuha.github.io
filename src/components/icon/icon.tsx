@@ -1,7 +1,9 @@
 import { Code } from "./svg/code";
+import Scan from "./svg/scan";
 
 const icons = {
   code: Code,
+  scan: Scan,
 } as const;
 export type IconProps = {
   size: number;
