@@ -1,4 +1,4 @@
-export default function Scan() {
+export function Scan() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
