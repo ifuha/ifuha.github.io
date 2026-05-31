@@ -7,6 +7,7 @@ import { Icon } from "@/components/icon/icon";
 
 export default function Page() {
   const [hovers, setHover] = useState(false);
+  const [createHover, setCreateHover] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const cursorRef = useRef<HTMLDivElement>(null);
 
@@ -25,7 +26,7 @@ export default function Page() {
   return (
     <div className="min-h-screen bg-black">
       <div className="fixed flex w-full px-4">
-        <Header></Header>
+        <Header />
       </div>
       <div className="flex flex-col gap-16 justify-center items-center min-h-screen">
         <Link
@@ -45,9 +46,21 @@ export default function Page() {
             ABOUT?
           </div>
         </Link>
-        <Link href={"/create"}>
-          <div className="text-white flex items-center justify-center text-2xl font-black cursor-pointer">
+        <Link
+          href={"/create"}
+          onMouseEnter={() => setCreateHover(true)}
+          onMouseLeave={() => setCreateHover(false)}
+          className="text-white flex items-center justify-center text-2xl font-black cursor-pointer"
+        >
+          <div
+            className={`absolute transition-all duration-300 delay-100 ${createHover ? "opacity-0" : "scale-150"}`}
+          >
             CREATE
+          </div>
+          <div
+            className={`absolute transition-all duration-300 delay-100 ${createHover ? "scale-150" : "opacity-0"}`}
+          >
+            CREATE?
           </div>
         </Link>
         <div
@@ -58,11 +71,16 @@ export default function Page() {
             top: position.y - 10,
             transition: "left 0.1s ease, top 0.1s ease",
           }}
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
+          onMouseEnter={() => {
+            (setHover(true), setCreateHover(true));
+          }}
+          onMouseLeave={() => {
+            (setHover(false), setCreateHover(false));
+          }}
         >
           <div
-            className={`duration-200 delay-100 text-white ${hovers ? "scale-300" : "scale-100"}`}
+            className={`duration-200 delay-100 text-white ${hovers ? "scale-300" : "scale-100"}
+            ${createHover ? "scale-300" : "scale-100"}`}
           >
             <Icon name="scan" size={24} />
           </div>
