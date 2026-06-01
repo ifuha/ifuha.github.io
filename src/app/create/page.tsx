@@ -3,11 +3,13 @@
 import { useState, useEffect, useRef } from "react";
 import { Icon } from "@/components/icon/icon";
 import Link from "next/link";
+import DecryptedText from "@/components/DecryptedText";
 
 export default function Create() {
   const [hovers, setHovers] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const cursorRef = useRef<HTMLDivElement>(null);
+  const [backHover, setBackHover] = useState(false);
 
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
@@ -23,7 +25,22 @@ export default function Create() {
 
   return (
     <div className="min-h-screen bg-black overflow-auto">
-      <div className="fixed w-full z-50 h-13 bg-black top-0" />
+      <div className="fixed w-full z-50 h-13 bg-black top-0 text-white text-xl font-black flex items-center">
+        <Link href={"/"}>
+          <div
+            className="w-36 p-4"
+            onMouseEnter={() => setBackHover(true)}
+            onMouseLeave={() => setBackHover(false)}
+          >
+            <DecryptedText
+              text={backHover ? "←" : "BACK"}
+              animateOn="view"
+              clickMode="once"
+              speed={140}
+            />
+          </div>
+        </Link>
+      </div>
       <div className="fixed w-full h-13 z-50 bg-black bottom-0" />
       <div className="flex flex-col gap-4 items-center justify-center py-32 w-full">
         <div className="text-white text-2xl font-bold">CREATE</div>
@@ -58,7 +75,7 @@ export default function Create() {
         </Link>
       </div>
       <div
-        className="fixed pointer-events-none transition-all"
+        className="fixed pointer-events-none transition-all z-50"
         ref={cursorRef}
         style={{
           left: position.x - 10,
@@ -67,7 +84,7 @@ export default function Create() {
         }}
       >
         <div
-          className={`duration-200 delay-100  ${hovers ? "scale-400 text-black" : "scale-100 text-white"}`}
+          className={`duration-200 delay-100  ${hovers ? "scale-400 text-black" : "scale-100 text-white"} ${backHover ? "scale-200" : "scale-100"}`}
         >
           <Icon name="scan" size={24} />
         </div>
