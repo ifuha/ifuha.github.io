@@ -14,6 +14,7 @@ import { VsCode } from "./svg/vsCode";
 import { Claude } from "./svg/claude";
 import { Pyton } from "./svg/python";
 import { Js } from "./svg/js";
+import { Laravel } from "./svg/laravel";
 
 const icons = {
   code: Code,
@@ -32,6 +33,7 @@ const icons = {
   claude: Claude,
   python: Pyton,
   js: Js,
+  laravel: Laravel,
 } as const;
 export type IconProps = {
   size: number;
